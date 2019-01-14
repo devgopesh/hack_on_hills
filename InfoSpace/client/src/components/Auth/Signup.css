@@ -1,0 +1,8 @@
+.signup { 
+	margin: auto;
+	width: 80%;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 16px;
+    box-sizing: border-box;
+}

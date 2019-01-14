@@ -1,0 +1,8 @@
+.toolbar {
+	display: flex;
+	margin: 10px;
+}
+
+.search {
+	margin-right: 3px;
+}
