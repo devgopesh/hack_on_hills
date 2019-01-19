@@ -10,15 +10,15 @@ class Signup extends Component {
 					<Form>
 						<FormGroup controlId="formControlsEmail">
 							<ControlLabel>Email</ControlLabel>
-							<FormControl type="email" placeholder="Email" />
+							<FormControl type="email" placeholder="Email" name="email" />
 						</FormGroup>
 						<FormGroup controlId="formControlsPassword">
 							<ControlLabel>Password</ControlLabel>
-							<FormControl type="password" placeholder="Password" />
+							<FormControl type="password" placeholder="Password" name="password" />
 						</FormGroup>
 						<FormGroup controlId="formControlsPassword">
 							<ControlLabel>Confirm Password</ControlLabel>
-							<FormControl type="password" placeholder="Confirm Password" />
+							<FormControl type="password" placeholder="Confirm Password" name="password_confirm" />
 						</FormGroup>
 						<Button type="submit">Sign Up</Button>
 					</Form>

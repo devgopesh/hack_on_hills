@@ -10,11 +10,11 @@ class Login extends Component {
 					<Form>
 						<FormGroup controlId="formControlsEmail">
 							<ControlLabel>Email</ControlLabel>
-							<FormControl type="email" placeholder="Email" />
+							<FormControl type="email" placeholder="Email" name="email" />
 						</FormGroup>
 						<FormGroup controlId="formControlsPassword">
 							<ControlLabel>Password</ControlLabel>
-							<FormControl type="password" placeholder="Password" />
+							<FormControl type="password" placeholder="Password" name="password" />
 						</FormGroup>
 						<FormGroup>
 							<Checkbox>Remember me</Checkbox>
