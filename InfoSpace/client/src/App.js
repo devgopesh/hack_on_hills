@@ -8,6 +8,7 @@ import electrical from './components/Branches/BranchLink/electrical/electrical';
 import Form from './containers/Form/Form';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
+import UsersForm from './components/Auth/UsersForm'
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index'
 
@@ -41,9 +42,8 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Toolbar />
         <Route path='/login' exact component={Login} />
-        <Route path='/signup' exact component={Signup} />
+        <Route path='/signup' exact component={UsersForm} />
       </div>
     );
   }
