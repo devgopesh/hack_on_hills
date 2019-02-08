@@ -28,24 +28,23 @@ class Header extends Component {
 
 		return (
 			<div>
-				<Navbar inverse collapseOnSelect className={classes.header}>
-					<Navbar.Header>
-						<Navbar.Brand>
-			      			<NavLink to='/'>INFOSPACE</NavLink>
-			    		</Navbar.Brand>
-					   	<Navbar.Toggle />
-					</Navbar.Header>
-					<Navbar.Collapse>				
-					    <Nav pullRight>
-					      <NavItem eventKey={1}>
-					      	<NavLink to='/login'>Login</NavLink>
-					      </NavItem>
-					      <NavItem eventKey={2}>
-							<NavLink to='/signup'>Signup</NavLink>
-					      </NavItem>				      
-					    </Nav>
-					</Navbar.Collapse>
-				</Navbar>
+				<Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar.Brand>InfoSpace</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">       
+            <Nav>
+              <Nav.Link>
+                  Home
+              </Nav.Link>
+              <Nav.Link>
+                About
+              </Nav.Link> 
+              <Nav.Link>
+                Contact
+              </Nav.Link>            
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 			</div>
 		);
 	}
