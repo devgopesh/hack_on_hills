@@ -4,13 +4,15 @@ import { Navbar, Nav, NavItem, FormGroup, FormControl } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'; 
 import axios from 'axios'
+import zulip from 'zulip-js'
+import path from 'path'
 
 import classes from './Header.css';
 
 class Header extends Component {
 	state = {
 		userName: null
-	}
+	}	
 
 	render() {
 		// if (this.props.isAuthenticated) {
@@ -28,24 +30,23 @@ class Header extends Component {
 
 		return (
 			<div>
-				<Navbar inverse collapseOnSelect className={classes.header}>
-					<Navbar.Header>
-						<Navbar.Brand>
-			      			<NavLink to='/'>INFOSPACE</NavLink>
-			    		</Navbar.Brand>
-					   	<Navbar.Toggle />
-					</Navbar.Header>
-					<Navbar.Collapse>				
-					    <Nav pullRight>
-					      <NavItem eventKey={1}>
-					      	<NavLink to='/login'>Login</NavLink>
-					      </NavItem>
-					      <NavItem eventKey={2}>
-							<NavLink to='/signup'>Signup</NavLink>
-					      </NavItem>				      
-					    </Nav>
-					</Navbar.Collapse>
-				</Navbar>
+				<Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark" className={classes.head}>
+          <Navbar.Brand>InfoSpace</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">       
+            <Nav>
+              <Nav.Link>
+                  Home
+              </Nav.Link>
+              <Nav.Link>
+                About
+              </Nav.Link> 
+              <Nav.Link>
+                Contact
+              </Nav.Link>                        
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 			</div>
 		);
 	}

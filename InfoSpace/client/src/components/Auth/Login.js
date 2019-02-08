@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, Checkbox, ControlLabel, Button, Grid, Row, Col } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Checkbox, ControlLabel, Button, Container, Row, Col } from 'react-bootstrap';
 import classes from './Login.css'
 
 class Login extends Component {
 	render() {
 		return (
 			<div>
-				<Grid className={classes.login}>
+				<Container className={classes.login}>
 					<Form>
 						<FormGroup controlId="formControlsEmail">
 							<ControlLabel>Email</ControlLabel>
@@ -21,7 +21,7 @@ class Login extends Component {
 						</FormGroup>
 						<Button type="submit">Sign in</Button>
 					</Form>
-				</Grid>
+				</Container>
 			</div>
 		);
 	}
