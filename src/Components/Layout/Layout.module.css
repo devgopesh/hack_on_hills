@@ -1,0 +1,13 @@
+.blockCode{
+	background-color: black;
+	height: 100vh;
+	padding:1em;
+	margin-top: 3em;
+}
+
+.button{
+    color:white;
+    text-align:center;
+    width:100%;
+    margin:.2em;
+}
