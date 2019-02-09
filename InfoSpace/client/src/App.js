@@ -9,6 +9,7 @@ import Form from './containers/Form/Form';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import UsersForm from './components/Auth/UsersForm'
+import HomePage from './components/Layout/HomePage'
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index'
 
@@ -43,7 +44,9 @@ class App extends Component {
       <div>
         <Header />
         <Route path='/login' exact component={Login} />
-        <Route path='/signup' exact component={UsersForm} />
+        <Route path='/signup' exact component={Signup} />
+        <Route path='/home' exact component={HomePage} />
+        <Route path='/usersform' exact component={UsersForm} />
       </div>
     );
   }

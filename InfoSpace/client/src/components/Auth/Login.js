@@ -11,6 +11,9 @@ class Login extends Component {
 						<Form.Group controlId="formControlsEmail">
 							<Form.Label>Email</Form.Label>
 							<Form.Control type="email" placeholder="Email" />
+							<Form.Text className="text-muted">
+						      We'll never share your email with anyone else.
+						    </Form.Text>
 						</Form.Group>
 						<Form.Group controlId="formControlsPassword">
 							<Form.Label>Password</Form.Label>
