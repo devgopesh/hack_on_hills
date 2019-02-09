@@ -64,7 +64,7 @@ export const signupUser = (user, history) => {
                     token
                 }                        
                 dispatch(setCurrentUser(obj));
-                alert("Wait for verification")
+                alert("Wait for verification")    
                 //history.push('/signup/verification/' + res.data.user._id);
             })
             .catch(err => {
@@ -140,6 +140,29 @@ export const authCheckState = () => {
         }
     };
 };
+
+export const sendMail = (mail) => {
+    return dispatch => {
+        const obj = {
+            to: mail
+        }        
+        axios.post('/api/users/sendmail', obj)
+            .then(res => {
+                console.log(res);
+                alert("mail sent");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+}
+
+window.onunload = function () {
+    //logout code here...
+    localStorage.removeItem('jwtToken');
+        setAuthToken(false);
+        setCurrentUser({}); 
+}
 
 // export const authCheckState = () => {
 //     return dispatch => {

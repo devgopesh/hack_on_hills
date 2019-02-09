@@ -4,6 +4,7 @@ const express = require('express'),
 	  passport = require('passport');	 
 
 const users = require('./routes/user'); 
+//require('./sendemail/email');
 
 const app = express();
 const keys = require('./config/keys');

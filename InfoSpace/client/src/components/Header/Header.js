@@ -31,7 +31,7 @@ class Header extends Component {
 			</div>
 		);
 
-		if (localStorage.getItem('jwtToken') && localStorage.getItem('isVerified')) {
+		if (this.props.isAuthenticated && localStorage.getItem('isVerified')) {
 			show = (
 				<Nav>		            		              
 	              <Nav.Link onClick={this.onLogout}>
@@ -46,7 +46,10 @@ class Header extends Component {
 				<Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark">
 		          <Navbar.Brand>InfoSpace</Navbar.Brand>
 		          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-		          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">       
+		          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav"> 
+		          	 <Nav.Link onClick={this.adminLogin}>
+	                	<NavLink to='/adminlogin'>Admin Login</NavLink>
+	              	  </Nav.Link>      
 		            {show}
 		          </Navbar.Collapse>
 		        </Navbar>
