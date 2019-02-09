@@ -11,6 +11,7 @@ import Signup from './components/Auth/Signup';
 import Admin from './components/Auth/Admin';
 import Verification from './components/Auth/Verification';
 import UsersForm from './components/Auth/UsersForm'
+import HomePage from './components/Layout/HomePage'
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index'
 
@@ -46,6 +47,7 @@ class App extends Component {
         <Route path='/login' exact component={Login} />
         <Route path='/signup' exact component={Signup} />
         <Route path='/adminlogin' exact component={Admin} />
+        <Route path='/home' exact component={HomePage} />        
         <Route path='/verification' exact component={Verification} />
       </div>
     );
