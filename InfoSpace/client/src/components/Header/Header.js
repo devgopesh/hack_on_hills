@@ -3,9 +3,7 @@ import BranchLink from '../Branches/BranchLink/BranchLink';
 import { Navbar, Nav, NavItem, FormGroup, FormControl } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'; 
-import axios from 'axios'
-import zulip from 'zulip-js'
-import path from 'path'
+import * as actions from '../../store/actions/index'
 
 import classes from './Header.css';
 
@@ -14,52 +12,61 @@ class Header extends Component {
 		userName: null
 	}	
 
-	render() {
-		// if (this.props.isAuthenticated) {
-		// 	const queryParams = '?auth=' + this.props.token + '&orderBy="userId"&equalTo="' + this.props.userId + '"';
-		// 	axios.get('/form.json' + queryParams)
-		// 		.then(res => {
-		// 			for (let key in res.data) {
-		// 				this.setState({userName: res.data[key].formData.name});
-		// 			}
-		// 		})
-		// 		.catch(err => {
-		// 			console.log(err);
-		// 		});
-		// }
+	onLogout = () => {
+		this.props.onLogout();
+		this.props.history.push('/')
+	}
+
+	render() {		
+		let show = (
+			<div>
+				<Nav>		            	
+	              <Nav.Link>
+	                  <NavLink to='/login'>Login</NavLink>
+	              </Nav.Link>
+	              <Nav.Link>
+	                <NavLink to='/signup'>Signup</NavLink>
+	              </Nav.Link>                       
+	            </Nav>
+			</div>
+		);
+
+		if (localStorage.getItem('jwtToken') && localStorage.getItem('isVerified')) {
+			show = (
+				<Nav>		            		              
+	              <Nav.Link onClick={this.onLogout}>
+	                Logout
+	              </Nav.Link>                       
+	            </Nav>
+			);
+		}
 
 		return (
 			<div>
-				<Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark" className={classes.head}>
-          <Navbar.Brand>InfoSpace</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">       
-            <Nav>
-              <Nav.Link>
-                  Home
-              </Nav.Link>
-              <Nav.Link>
-                About
-              </Nav.Link> 
-              <Nav.Link>
-                Contact
-              </Nav.Link>                        
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+				<Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark">
+		          <Navbar.Brand>InfoSpace</Navbar.Brand>
+		          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+		          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">       
+		            {show}
+		          </Navbar.Collapse>
+		        </Navbar>
 			</div>
 		);
 	}
 };
 
-// const mapStateToProps = state => {
-// 	return {
-// 		isAuthenticated: state.auth.token != null,
-// 		token: state.auth.token,
-// 		userId: state.auth.userId
-// 	};
-// }
+const mapStateToProps = state => {
+	return {
+		isAuthenticated: state.auth.token != null,
+		token: state.auth.token,
+		userId: state.auth.userId		
+	};
+}
 
-// export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => {
+	return {
+		onLogout: () => dispatch(actions.logoutUser())
+	}
+}
 
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

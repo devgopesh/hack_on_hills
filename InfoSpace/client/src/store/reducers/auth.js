@@ -1,10 +1,10 @@
 import * as actions from '../actions/actionTypes';
-import isEmpty from '../is-empty';
+import isEmpty from '../../is-empty';
 
 const initialState = {
     isAuthenticated: false,
     user: {},
-    token: null
+    token: null    
 }
 
 export default function(state = initialState, action ) {    
@@ -14,7 +14,7 @@ export default function(state = initialState, action ) {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload.decoded),
                 user: action.payload.decoded,
-                token: action.payload.token
+                token: action.payload.token                
             }
         default: 
             return state;

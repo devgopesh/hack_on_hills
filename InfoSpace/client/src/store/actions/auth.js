@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as actions from './actionTypes';
-import setAuthToken from '../setAuthToken';
+import setAuthToken from '../../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 // export const authStart = () => {
@@ -45,7 +45,8 @@ import jwt_decode from 'jwt-decode';
 export const signupUser = (user, history) => {
 	return dispatch => {
 		//dispatch(authStart());	
-		axios.post('/register', user)
+        console.log(user)        
+		axios.post('/api/users/register', user)
 			.then(res => {
 				//cnst expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
                 // localStorage.setItem('token', response.data.idToken);
@@ -53,6 +54,7 @@ export const signupUser = (user, history) => {
                 // localStorage.setItem('userId', response.data.localId);
                 // dispatch(authSuccess(response.data.idToken, response.data.localId));
                 // dispatch(checkAuthTimeout(response.data.expiresIn));
+                console.log(res.data);
                 const { token } = res.data;
                 localStorage.setItem('jwtToken', token);
                 setAuthToken(token);
@@ -62,12 +64,15 @@ export const signupUser = (user, history) => {
                     token
                 }                        
                 dispatch(setCurrentUser(obj));
+                alert("Wait for verification")
+                //history.push('/signup/verification/' + res.data.user._id);
             })
             .catch(err => {
                 dispatch({
                     type: actions.GET_ERRORS,
                     payload: err.response.data
                 });
+                console.log(err)
             });			
 			// .catch(error => {
 			// 	dispatch(authFail(error.response.data.error));
@@ -75,8 +80,9 @@ export const signupUser = (user, history) => {
 	};
 }
 
-export const loginUser = (user) => dispatch => {
-    axios.post('/login', user)
+export const loginUser = (user, history) => {
+    return dispatch => {
+    axios.post('/api/users/login', user)
             .then(res => {                
                 const { token } = res.data;
                 localStorage.setItem('jwtToken', token);
@@ -84,9 +90,15 @@ export const loginUser = (user) => dispatch => {
                 const decoded = jwt_decode(token);   
                 const obj = {
                     decoded,
-                    token
+                    token                    
                 }                        
-                dispatch(setCurrentUser(obj));
+                dispatch(setCurrentUser(obj));                
+                if (res.data.user.isVerified) {
+                    localStorage.setItem('isVerified', true)
+                    history.push('/');
+                } else {
+                    history.push('/verification')
+                }
             })
             .catch(err => {
                 dispatch({
@@ -94,6 +106,7 @@ export const loginUser = (user) => dispatch => {
                     payload: err.response.data
                 });
             });
+    }
 }
 
 export const setCurrentUser = obj => {
@@ -103,10 +116,12 @@ export const setCurrentUser = obj => {
     }
 }
 
-export const logoutUser = () => dispatch => {
-    localStorage.removeItem('jwtToken');
-    setAuthToken(false);
-    dispatch(setCurrentUser({}));
+export const logoutUser = () => {
+    return dispatch => {
+        localStorage.removeItem('jwtToken');
+        setAuthToken(false);
+        dispatch(setCurrentUser({}));       
+    }
 }
 
 export const authCheckState = () => {
