@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "engine": {
-    "node": "10.9.0",
-    "npm": "6.5.0"
+    "node": "11.6.0",
+    "npm": "6.7.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.3",

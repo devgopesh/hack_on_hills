@@ -1,13 +1,15 @@
-const Validator = require('validator'),
-	  isEmpty = require('./is-empty');
+//Here all the input values are checked to see the validation and if it fails then error object will be sent back to the user and display that errors in proper format.
 
-module.exports = validateRegisterInput = (data) => {
-	let errors = {};
-	data.email = !isEmpty(data.email) ? data.email : '';
-	data.password = !isEmpty(data.password) ? data.password : '';
-	data.password_confirm = !isEmpty(data.password_confirm) ? data.password_confirm : '';
+const Validator = require('validator');
+const isEmpty = require('./is-empty');
 
-	if(!Validator.isEmail(data.email)) {
+module.exports = function validateRegisterInput(data) {
+    let errors = {};    
+    data.email = !isEmpty(data.email) ? data.email : '';
+    data.password = !isEmpty(data.password) ? data.password : '';
+    data.password_confirm = !isEmpty(data.password_confirm) ? data.password_confirm : '';        
+
+    if(!Validator.isEmail(data.email)) {
         errors.email = 'Email is invalid';
     }
 

@@ -1,20 +1,22 @@
 const express = require('express'),
 	  mongoose = require('mongoose'),
 	  bodyParser = require('body-parser'),
-	  passport = require('passport');
+	  passport = require('passport');	 
 
+const users = require('./routes/user'); 
+
+const app = express();
 const keys = require('./config/keys');
-
-const users = require('./routes/user');
 
 mongoose.connect(keys.mongoURI);
 
-const app = express();
 app.use(passport.initialize());
 require('./passport')(passport);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use('/api/users', users);
 
 app.get('/', (req, res) => {
 	res.send('HI!');
