@@ -3,6 +3,8 @@ import * as actions from './actionTypes';
 import setAuthToken from '../../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
+// import nodemailer from 'nodemailer';
+// import xoauth2 from 'xoauth2'
 // export const authStart = () => {
 // 	return {
 // 		type: actionTypes.AUTH_START
@@ -65,6 +67,35 @@ export const signupUser = (user, history) => {
                 }                        
                 dispatch(setCurrentUser(obj));
                 alert("Wait for verification")
+                // let transporter = nodemailer.createTransport({
+                // service: 'gmail',
+                // host: 'smtp.gmail.com',
+                // secure: 'true',
+                // port: '465',
+                // auth: {
+                // type: 'OAuth2', //Authentication type
+                // user: 'gopeshsinghal123@gmail.com', //For example, xyz@gmail.com
+                // clientId: '1039234355869-f498ailtt61jglhn8smc0sbrt7iip3g7.apps.googleusercontent.com',
+                // clientSecret: 'Gcoaq8J1dEWTddHt3jllm5Cc',
+                // refreshToken: '1/qiFt7WS9tqRK2YqhyhkqPWPJW0_Kvd6xxfYR67x0T8A'
+                //      }
+                // });
+
+                // let mailOptions = {
+                // from: 'gopeshsinghal123@gmail.com',
+                // to: res.data.user.email,
+                // subject: 'This is subject',
+                // text: 'This is email content'};
+
+                // transporter.sendMail(mailOptions, function(e, r) {
+                // if (e) {
+                //   console.log(e);
+                // }
+                // else {
+                //   console.log(r);
+                //     }
+                // transporter.close();
+                // });
                 //history.push('/signup/verification/' + res.data.user._id);
             })
             .catch(err => {

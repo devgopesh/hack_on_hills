@@ -39,7 +39,7 @@ class Login extends Component {
 						<Form.Group>
 							<Form.Check type="checkbox" label="Remember Me" />
 						</Form.Group>
-						<Button type="submit">Sign in</Button>
+						<Button type="submit" onClick={this.showHome}>Log in</Button>
 					</Form>
 				</Container>
 			</div>

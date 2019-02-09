@@ -34,6 +34,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "jwt-decode": "^2.2.0",
+    "nodemailer": "^5.1.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -56,6 +57,7 @@
     "webpack-dev-server": "2.11.3",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3",
+    "xoauth2": "^1.2.0",
     "zulip-js": "^2.0.5"
   },
   "scripts": {
