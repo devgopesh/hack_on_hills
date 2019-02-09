@@ -8,6 +8,7 @@ import electrical from './components/Branches/BranchLink/electrical/electrical';
 import Form from './containers/Form/Form';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
+import Admin from './components/Auth/Admin';
 import Verification from './components/Auth/Verification';
 import UsersForm from './components/Auth/UsersForm'
 import { connect } from 'react-redux';
@@ -44,6 +45,7 @@ class App extends Component {
         <Route path='/' exact component={Header} />
         <Route path='/login' exact component={Login} />
         <Route path='/signup' exact component={Signup} />
+        <Route path='/adminlogin' exact component={Admin} />
         <Route path='/verification' exact component={Verification} />
       </div>
     );
