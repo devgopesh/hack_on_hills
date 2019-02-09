@@ -8,21 +8,21 @@ import electrical from './components/Branches/BranchLink/electrical/electrical';
 import Form from './containers/Form/Form';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
+import Verification from './components/Auth/Verification';
 import UsersForm from './components/Auth/UsersForm'
 import HomePage from './components/Layout/HomePage'
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index'
 
 class App extends Component {
-  // componentDidMount () {
-  //   this.props.onTryAutoSignup();
-  // }
+  componentDidMount () {
+    this.props.onTryAutoSignup();
+  }
   
   render() {
     // let routes = (
     //   <Switch>
-    //     <Route path="/" exact component={auth} />
-    //     <Redirect to="/" />
+    //     <Route path="/" exact component={auth} />     
     //   </Switch>
     // );
 
@@ -42,28 +42,27 @@ class App extends Component {
 
     return (
       <div>
-        <Header />
+        <Route path='/' exact component={Header} />
         <Route path='/login' exact component={Login} />
         <Route path='/signup' exact component={Signup} />
         <Route path='/home' exact component={HomePage} />
         <Route path='/usersform' exact component={UsersForm} />
+        <Route path='/verification' exact component={Verification} />
       </div>
     );
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     isAuthenticated: state.auth.token !== null
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onTryAutoSignup: () => dispatch( actions.authCheckState() )
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch( actions.authCheckState() )
+  };
+};
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
-
-export default App;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
