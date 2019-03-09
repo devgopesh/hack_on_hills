@@ -21,7 +21,8 @@ const UserSchema = new Schema({
     isVerified: {
     	type: Number,
     	default: 0
-    }  
+    },
+    socketId: String
 });
 
 const User = mongoose.model('users', UserSchema);

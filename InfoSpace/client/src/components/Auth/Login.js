@@ -4,15 +4,41 @@ import classes from './Login.css'
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index'
 
+import io from 'socket.io-client'
+
 class Login extends Component {
 	state = {
 		email: '',
-		password: ''
+		password: '',
+		id: '',
+		socket: null
 	}
+
+	// componentWillMount() {
+	// 	this.initSocket()
+	// }
+
+	/*
+	*	Connect to and initializes the socket.
+	*/
+	// initSocket = ()=>{
+	// 	const socket = io('localhost:5000')
+	// 	let id = null;
+
+	// 	socket.on('connect', ()=>{
+	// 		console.log("Connected");
+	// 		console.log(socket.id)
+	// 		this.props.updateSocket(socket.id, this.state.email)
+	// 	})
+	// 	//console.log(this.state.id)
+	// 	localStorage.setItem('socket', socket)
+	// 	this.setState({socket})
+	// }
 
 	handleSubmit = (ev) => {		
 		ev.preventDefault();		
 		this.props.loginUser(this.state, this.props.history);
+		//this.initSocket()		
 	}
 
 	handleInputChange = (event) => {		
@@ -47,10 +73,16 @@ class Login extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+	return {
+		user: state.auth.user	
+	};
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		loginUser: (user, history) => dispatch(actions.loginUser(user, history))
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -14,6 +14,11 @@ import UsersForm from './components/Auth/UsersForm'
 import HomePage from './components/Layout/HomePage'
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index'
+import Chat from './components/Auth/Chat'
+import Room from './components/Room/Room';
+import ChatRoom from './components/Room/ChatRoom';
+
+import './index.css';
 
 class App extends Component {
   componentDidMount () {
@@ -43,12 +48,15 @@ class App extends Component {
 
     return (
       <div>
-        <Route path='/' exact component={Header} />
+        <Header />
         <Route path='/login' exact component={Login} />
+        <Route path='/room' exact component={Room} />
+        <Route path='/room/:room' exact component={ChatRoom} />
         <Route path='/signup' exact component={Signup} />
         <Route path='/adminlogin' exact component={Admin} />
-        <Route path='/home' exact component={HomePage} />        
+        <Route path='/' exact component={HomePage} />        
         <Route path='/verification' exact component={Verification} />
+        <Route path='/chat/:id/:sender/:id/:receiver' exact component={Chat} />
       </div>
     );
   }

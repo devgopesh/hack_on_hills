@@ -10,6 +10,8 @@ const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2');
 
 const User = require('../models/User');
+const Msgreq = require('../models/Msgreq');
+const UserMessage = require('../models/UserMessage');
 
 router.post('/register', (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -132,8 +134,8 @@ router.post('/sendmail', (req, res) => {
     let mailOptions = {
     from: 'gopeshsinghal123@gmail.com',
     to: req.body.to,
-    subject: 'This is subject',
-    text: 'This is email content'};
+    subject: 'Online verfication of Alumnet Network ',
+    text: 'Congratulations! Your email has been verified. Welcome to the Alumnet family, we hope that you get great guidance from your seniors and in turn help your juniors.'};
 
     transporter.sendMail(mailOptions, function(e, r) {
     if (e) {
@@ -147,6 +149,63 @@ router.post('/sendmail', (req, res) => {
     // console.log(req.body.to)
     res.send({})
 });
+
+router.get('/allUsers', async (req, res) => {
+    const users = await User.find();
+    res.send(users);
+});
+
+router.post('/messagerequest', (req, res) => {
+    const newRequest = new Msgreq({
+        senderId: req.body.senderId,
+        receiverId: req.body.receiverId,
+        senderName: req.body.senderName            
+    })
+
+    newRequest.save()
+        .then(req => {
+            res.send(req);
+        })
+        .catch(err => {
+            res.send(req);
+        })
+});
+
+router.post('/privatemessage', (req, res) => {
+    const newMessage = new UserMessage({
+        senderId: req.body.senderId,
+        receiverId: req.body.receiverId,
+        message: req.body.message,
+        time: new Date()            
+    }) 
+    newMessage.save()
+        .then(req => {
+            res.send(req);
+        })
+        .catch(err => {
+            res.send(req);
+        })
+});
+
+// router.get('/findmessagerequest', async (req, res) => {
+//     // const requests = await Msgreq.find({senderId: req.query.id});
+//     // res.send(requests)
+// });
+
+// router.put('/updateSocket/:mail', (req, res) => {
+//         const user = {
+//             socketId: req.body.socketId
+//         }
+        
+//         User.find({email: req.params.mail}, user, (err) => {
+//             if (err) {
+//                 console.log(err);
+//             } else {
+//                 console.log("success")
+//                 res.send({});
+//             } 
+//         })
+//     });
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({

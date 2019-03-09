@@ -3,6 +3,26 @@ import * as actions from './actionTypes';
 import setAuthToken from '../../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
+export const fetchUser = (users) => {
+    return {
+        type: actions.FETCH_USERS,
+        users: users
+    }
+};
+
+export const isVerified = () => {
+    return {
+        type: actions.VERIFY        
+    }
+};
+
+export const isRequestSent = (data) => {
+    return {
+        type: actions.IS_REQUEST_SENT,
+        data: data      
+    }
+};
+
 // export const authStart = () => {
 // 	return {
 // 		type: actionTypes.AUTH_START
@@ -94,7 +114,7 @@ export const loginUser = (user, history) => {
                 }                        
                 dispatch(setCurrentUser(obj));                
                 if (res.data.user.isVerified) {
-                    localStorage.setItem('isVerified', true)
+                    dispatch(isVerified());                    
                     history.push('/');
                 } else {
                     history.push('/verification')
@@ -163,6 +183,62 @@ window.onunload = function () {
         setAuthToken(false);
         setCurrentUser({}); 
 }
+
+export const fetchUsers = () => {
+    return dispatch => {
+        axios.get('/api/users/allUsers')
+            .then(res => {                
+                dispatch(fetchUser(res.data));
+            });
+    }
+}
+
+export const messageRequest = (obj) => {
+    return dispatch => {
+        axios.post('/api/users/messagerequest', obj)
+            .then(res => {                
+                console.log(res.data);
+                dispatch(isRequestSent(res.data.receiverId));
+            })
+            .catch(err => console.log(err));
+    }
+}
+
+export const findMessageRequest = (id) => {
+    return dispatch => {
+        axios.get('/api/users/findmessagerequest?id=' + id)
+            .then(res => {                
+                console.log(res.data);                
+                dispatch(isRequestSent(res.data));
+            })
+            .catch(err => console.log(err));
+    }
+}
+
+export const privateMessage = (msgObj) => {
+    return dispatch => {
+        axios.post('/api/users/privatemessage', msgObj)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err));
+    }
+}
+
+// export const updateSocket = (id, email) => {
+//     const obj = {
+//         socketId: id
+//     }
+//     console.log(obj)
+//     return dispatch => {
+//         axios.put(`/api/users/updateSocket/${email}`, obj)
+//             .then(res => {                
+//                 console.log(res.data);                
+//                 //dispatch(isRequestSent(res.data));
+//             })
+//             .catch(err => console.log(err));
+//     }
+// }
 
 // export const authCheckState = () => {
 //     return dispatch => {

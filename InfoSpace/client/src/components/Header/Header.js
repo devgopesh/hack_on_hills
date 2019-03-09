@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BranchLink from '../Branches/BranchLink/BranchLink';
 import { Navbar, Nav, NavItem, FormGroup, FormControl } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'; 
 import * as actions from '../../store/actions/index'
 
@@ -14,7 +14,7 @@ class Header extends Component {
 
 	onLogout = () => {
 		this.props.onLogout();
-		this.props.history.push('/')
+		<Redirect to='/' />
 	}
 
 	render() {		
@@ -31,7 +31,7 @@ class Header extends Component {
 			</div>
 		);
 
-		if (this.props.isAuthenticated && localStorage.getItem('isVerified')) {
+		if (this.props.isAuthenticated && this.props.isVerified) {
 			show = (
 				<Nav>		            		              
 	              <Nav.Link onClick={this.onLogout}>
@@ -44,11 +44,12 @@ class Header extends Component {
 		return (
 			<div>
 				<Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark">
-		          <Navbar.Brand>InfoSpace</Navbar.Brand>
+		          <Navbar.Brand><NavLink to='/'>InfoSpace</NavLink></Navbar.Brand>
 		          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 		          <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav"> 
 		          	 <Nav.Link onClick={this.adminLogin}>
-	                	<NavLink to='/adminlogin'>Admin Login</NavLink>
+		          	 	<NavLink to='/room' style={{marginRight: 10}}>Create Room</NavLink>
+	                	<NavLink to='/adminlogin'>Admin Login</NavLink>	                	
 	              	  </Nav.Link>      
 		            {show}
 		          </Navbar.Collapse>
@@ -62,7 +63,7 @@ const mapStateToProps = state => {
 	return {
 		isAuthenticated: state.auth.token != null,
 		token: state.auth.token,
-		userId: state.auth.userId		
+		isVerified: state.auth.isVerified		
 	};
 }
 

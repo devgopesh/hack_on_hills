@@ -4,7 +4,10 @@ import isEmpty from '../../is-empty';
 const initialState = {
     isAuthenticated: false,
     user: {},
-    token: null    
+    token: null,
+    users: [],
+    isVerified: false,
+    requests: [] 
 }
 
 export default function(state = initialState, action ) {    
@@ -16,6 +19,21 @@ export default function(state = initialState, action ) {
                 user: action.payload.decoded,
                 token: action.payload.token                
             }
+        case actions.FETCH_USERS:
+            return {
+                ...state,                
+                users: action.users
+            };
+        case actions.VERIFY:
+            return {
+                ...state,                
+                isVerified: true
+            };
+        case actions.IS_REQUEST_SENT:
+            return {
+                ...state,                
+                requests: action.data
+            };
         default: 
             return state;
     }
