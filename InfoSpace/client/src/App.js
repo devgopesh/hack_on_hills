@@ -57,7 +57,7 @@ class App extends Component {
         <Route path='/adminlogin' exact component={Admin} />
         <Route path='/' exact component={HomePage} />        
         <Route path='/verification' exact component={Verification} />
-        <Route path='/chat/:sender_id/:sender/:receiver_id/:receiver' exact component={Chat} />
+        <Route path='/chat/:sender_id/:sender/:receiver_id/:receiver' exact component={PrivateChat} />
       </div>
     );
   }

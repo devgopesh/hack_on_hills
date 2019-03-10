@@ -6,6 +6,7 @@ import PrivateChatTemp from './PrivateChatTemp';
 import IncomingMsg from './IncomingMsg';
 import OutgoingMsg from './OutgoingMsg';
 import io from "socket.io-client";
+import { connect } from 'react-redux';
 //import { FaSearch } from 'react-icons/fa';
 
 class PrivateChat extends Component{
@@ -64,7 +65,7 @@ class PrivateChat extends Component{
                 receiverId: this.props.match.params.id,
                 message: this.state.msg
             }
-            this.props.privateMessage(msgObj);
+            //this.props.privateMessage(msgObj);
             this.setState({msg: ''})
         }
 
@@ -118,20 +119,25 @@ class PrivateChat extends Component{
                     </div>
                     <div className={classes.mesgs}>
                       <div className={classes.msg_history}>
-                        <IncomingMsg 
+                        {/*<IncomingMsg 
                         imageURL = "https://ptetutorials.com/images/user-profile.png"
                         message = "Test which is a new approach to have all solutions"
                         timeDate = '11:01 AM    |    June 9'/>
                         
                         <OutgoingMsg 
                           message = 'Apollo University, Delhi, India Test'
-                          timeDate = '11:01 AM    |    Today'/>                                                  
+                          timeDate = '11:01 AM    |    Today'/> */} 
+                          {this.state.messages.map(message => {
+                            return (
+                                <div>{message.message}</div>
+                            )
+                        })}                                                
 
                       </div>
                       <div className={classes.type_msg}>
                         <div className={classes.input_msg_write}>
-                          <input type="text" className={classes.write_msg} placeholder="Type a message" />
-                          <button className={classes.msg_send_btn} type="button"><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                          <input type="text" className={classes.write_msg} placeholder="Type a message" name="msg" value={this.state.msg} onChange={this.handleInputChange} />
+                          <button className={classes.msg_send_btn} type="button" onClick={this.sendMessage}><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                         </div>
                       </div>
                     </div>
@@ -143,4 +149,10 @@ class PrivateChat extends Component{
     }
 }
 
-export default PrivateChat;
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user   
+    };
+}
+
+export default connect(mapStateToProps)(PrivateChat);
