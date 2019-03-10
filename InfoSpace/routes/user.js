@@ -126,9 +126,9 @@ router.post('/sendmail', (req, res) => {
     auth: {
      type: 'OAuth2', //Authentication type
      user: 'gopeshsinghal123@gmail.com', //For example, xyz@gmail.com
-     clientId: '1039234355869-f498ailtt61jglhn8smc0sbrt7iip3g7.apps.googleusercontent.com',
-     clientSecret: 'Gcoaq8J1dEWTddHt3jllm5Cc',
-     refreshToken: '1/qiFt7WS9tqRK2YqhyhkqPWPJW0_Kvd6xxfYR67x0T8A'
+     clientId: '',
+     clientSecret: '',
+     refreshToken: ''
          }
     });    
     let mailOptions = {

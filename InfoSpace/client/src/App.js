@@ -17,6 +17,7 @@ import * as actions from './store/actions/index'
 import Chat from './components/Auth/Chat'
 import Room from './components/Room/Room';
 import ChatRoom from './components/Room/ChatRoom';
+import PrivateChat from './components/PrivateChat/PrivateChat'
 
 import './index.css';
 
@@ -56,7 +57,7 @@ class App extends Component {
         <Route path='/adminlogin' exact component={Admin} />
         <Route path='/' exact component={HomePage} />        
         <Route path='/verification' exact component={Verification} />
-        <Route path='/chat/:id/:sender/:id/:receiver' exact component={Chat} />
+        <Route path='/chat/:sender_id/:sender/:receiver_id/:receiver' exact component={Chat} />
       </div>
     );
   }
